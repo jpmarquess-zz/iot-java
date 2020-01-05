@@ -80,6 +80,8 @@ public class Device extends javax.swing.JFrame {
 
             if (distance < 20) {
                 pin.high();
+            } else {
+                pin.low();
             }
             
             /*if (distance < DirectMethodCallback.distance) {
