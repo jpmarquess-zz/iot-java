@@ -1,7 +1,7 @@
-D:\PC\Desktop\JAVA\src\main\java\com\mycompany\smarttermoazureiot\TelemetryDataPoint.java
-D:\PC\Desktop\JAVA\src\main\java\com\mycompany\smarttermoazureiot\Device.java
-D:\PC\Desktop\JAVA\src\main\java\com\mycompany\smarttermoazureiot\RemoteController.java
-D:\PC\Desktop\JAVA\src\main\java\com\mycompany\smarttermoazureiot\events\DirectMethodCallback.java
-D:\PC\Desktop\JAVA\src\main\java\com\mycompany\smarttermoazureiot\RemoteConsole.java
-D:\PC\Desktop\JAVA\src\main\java\com\mycompany\smarttermoazureiot\events\DirectMethodStatusCallback.java
-D:\PC\Desktop\JAVA\src\main\java\com\mycompany\smarttermoazureiot\events\EventCallback.java
+/home/pi/Desktop/iot-java/src/main/java/com/mycompany/smarttermoazureiot/events/DirectMethodStatusCallback.java
+/home/pi/Desktop/iot-java/src/main/java/com/mycompany/smarttermoazureiot/TelemetryDataPoint.java
+/home/pi/Desktop/iot-java/src/main/java/com/mycompany/smarttermoazureiot/events/EventCallback.java
+/home/pi/Desktop/iot-java/src/main/java/com/mycompany/smarttermoazureiot/events/DirectMethodCallback.java
+/home/pi/Desktop/iot-java/src/main/java/com/mycompany/smarttermoazureiot/RemoteConsole.java
+/home/pi/Desktop/iot-java/src/main/java/com/mycompany/smarttermoazureiot/RemoteController.java
+/home/pi/Desktop/iot-java/src/main/java/com/mycompany/smarttermoazureiot/Device.java

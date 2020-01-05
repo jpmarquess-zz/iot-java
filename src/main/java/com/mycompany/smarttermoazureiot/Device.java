@@ -40,13 +40,13 @@ public class Device extends javax.swing.JFrame {
     private static DeviceClient client;
     private double distance;
     final GpioController gpio = GpioFactory.getInstance();
+    GpioPinDigitalOutput pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_01, "MyLED", PinState.HIGH);
 
     /**
      * Creates new form Device
      */
     Timer t = new Timer();
     TimerTask raspberry = new TimerTask() {
-        final GpioPinDigitalOutput pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_01, "MyLED", PinState.HIGH);
         // Trigger pin as OUTPUT
         GpioPinDigitalOutput sensorTriggerPin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_07);
         // Echo pin as INPUT
