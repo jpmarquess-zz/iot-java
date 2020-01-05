@@ -14,6 +14,7 @@ import com.pi4j.io.gpio.GpioFactory;
 import com.pi4j.io.gpio.GpioPinDigitalInput;
 import com.pi4j.io.gpio.GpioPinDigitalOutput;
 import com.pi4j.io.gpio.PinPullResistance;
+import com.pi4j.io.gpio.PinState;
 import com.pi4j.io.gpio.RaspiPin;
 
 import java.io.*;
@@ -45,6 +46,7 @@ public class Device extends javax.swing.JFrame {
      */
     Timer t = new Timer();
     TimerTask raspberry = new TimerTask() {
+        final GpioPinDigitalOutput pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_01, "MyLED", PinState.HIGH);
         // Trigger pin as OUTPUT
         GpioPinDigitalOutput sensorTriggerPin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_07);
         // Echo pin as INPUT
@@ -76,6 +78,10 @@ public class Device extends javax.swing.JFrame {
 
             distance = ((((endTime - startTime) / 1e3) / 2) / 29.1);
 
+            if (distance < 20) {
+                pin.high();
+            }
+            
             /*if (distance < DirectMethodCallback.distance) {
 
             }*/
