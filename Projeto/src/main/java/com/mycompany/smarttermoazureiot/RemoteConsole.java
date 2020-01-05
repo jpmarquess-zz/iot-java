@@ -48,6 +48,8 @@ public class RemoteConsole extends javax.swing.JFrame {
     private final ScheduledExecutorService executorService;
     private final EventHubClient ehClient;
     private final EventHubRuntimeInformation eventHubInfo;
+    
+    public static double test = 0;
 
     // Track all the PartitionReciever instances created.
     /**
@@ -70,6 +72,8 @@ public class RemoteConsole extends javax.swing.JFrame {
         for (String partitionId : eventHubInfo.getPartitionIds()) {
             receiveMessages(ehClient, partitionId);
         }
+        
+        jTextAreaRemoteConsole.append(" " + test);
     }
 
     /**
@@ -82,13 +86,13 @@ public class RemoteConsole extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        jTextAreaRemoteConsole = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        jTextAreaRemoteConsole.setColumns(20);
+        jTextAreaRemoteConsole.setRows(5);
+        jScrollPane1.setViewportView(jTextAreaRemoteConsole);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -153,7 +157,7 @@ public class RemoteConsole extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextArea jTextAreaRemoteConsole;
     // End of variables declaration//GEN-END:variables
 
     private void receiveMessages(EventHubClient ehClient, String partitionId) throws EventHubException {
@@ -164,9 +168,9 @@ public class RemoteConsole extends javax.swing.JFrame {
         // the time the receiver is created. Typically, you don't want to skip any messages.
         ehClient.createReceiver(EventHubClient.DEFAULT_CONSUMER_GROUP_NAME, partitionId,
                 EventPosition.fromEnqueuedTime(Instant.now())).thenAcceptAsync(receiver -> {
-            jTextArea1.append(String.format("Starting receive loop on partition: %s", partitionId));
-            jTextArea1.append(String.format("Reading messages sent since: %s", Instant.now().toString()));
-            jTextArea1.append(String.format("\n"));
+            jTextAreaRemoteConsole.append(String.format("Starting receive loop on partition: %s", partitionId));
+            jTextAreaRemoteConsole.append(String.format("Reading messages sent since: %s", Instant.now().toString()));
+            jTextAreaRemoteConsole.append(String.format("\n"));
 
             receivers.add(receiver);
 
@@ -178,15 +182,15 @@ public class RemoteConsole extends javax.swing.JFrame {
                     // If there is data in the batch, process it.
                     if (receivedEvents != null) {
                         for (EventData receivedEvent : receivedEvents) {
-                            jTextArea1.append(String.format("Telemetry received:\n %s"));
-                            jTextArea1.append(String.format("Telemetry received:\n %s",
+                            jTextAreaRemoteConsole.append(String.format("Telemetry received:\n %s"));
+                            jTextAreaRemoteConsole.append(String.format("Telemetry received:\n %s",
                                     new String(receivedEvent.getBytes(), Charset.defaultCharset())));
-                            jTextArea1.append(String.format("Application properties (set by device):\n%s", receivedEvent.getProperties().toString()));
-                            jTextArea1.append(String.format("System properties (set by IoT Hub):\n%s\n", receivedEvent.getSystemProperties().toString()));
+                            jTextAreaRemoteConsole.append(String.format("Application properties (set by device):\n%s", receivedEvent.getProperties().toString()));
+                            jTextAreaRemoteConsole.append(String.format("System properties (set by IoT Hub):\n%s\n", receivedEvent.getSystemProperties().toString()));
                         }
                     }
                 } catch (EventHubException e) {
-                    jTextArea1.append("Error reading EventData");
+                    jTextAreaRemoteConsole.append("Error reading EventData");
                 }
             }
         }, executorService);

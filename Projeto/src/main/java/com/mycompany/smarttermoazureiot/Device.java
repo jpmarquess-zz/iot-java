@@ -17,6 +17,8 @@ import com.pi4j.io.gpio.PinPullResistance;
 import com.pi4j.io.gpio.PinState;
 import com.pi4j.io.gpio.RaspiPin;
 
+import com.mycompany.smarttermoazureiot.RemoteConsole;
+
 import java.io.*;
 import java.net.URISyntaxException;
 import java.util.Random;
@@ -80,6 +82,7 @@ public class Device extends javax.swing.JFrame {
 
             if (distance < 20) {
                 pin.high();
+                RemoteConsole.test = distance;
             } else {
                 pin.low();
             }
