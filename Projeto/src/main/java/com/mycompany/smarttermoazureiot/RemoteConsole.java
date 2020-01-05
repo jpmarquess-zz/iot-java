@@ -72,8 +72,6 @@ public class RemoteConsole extends javax.swing.JFrame {
         for (String partitionId : eventHubInfo.getPartitionIds()) {
             receiveMessages(ehClient, partitionId);
         }
-        
-        jTextAreaRemoteConsole.append(" " + test);
     }
 
     /**
